@@ -1,0 +1,59 @@
+version: '3'
+
+networks:
+  local_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.10.0.0/24
+          # gateway: 172.10.0.1
+          # remove gateway from yml version 3
+
+services:
+
+  nginx_main:
+    build: ./nginx/main
+    volumes:
+      - ./common/hosts:/etc/hosts:ro
+      - ./opt:/opt
+      - /Users/hui/ch/projects:/opt/projects
+      - /Users/hui/ch/websites:/opt/websites
+    networks:
+      local_net:
+        ipv4_address: 172.10.0.11
+    ports:
+      - "80:80"
+    hostname: local_nginx_main
+    container_name: nginx_main
+
+  php_main:
+    build: ./php/main
+    volumes:
+      - ./common/hosts:/etc/hosts:ro
+      - ./opt:/opt
+      - /Users/hui/ch/projects:/workdir/projects
+      - /Users/hui/ch/websites:/workdir/websites
+    networks:
+      local_net:
+        ipv4_address: 172.10.0.21
+    ports:
+      - "9001:9000"
+    hostname: local_php_main
+    container_name: php_main
+
+  mysql_main:
+    build: ./mysql/main
+    volumes:
+      - ./Users/hui/ch/datas/mysql/main/db:/var/lib/mysql
+      - ./common/hosts:/etc/hosts:ro
+    networks:
+      local_net:
+        ipv4_address: 172.10.0.31
+    ports:
+      - "3310:3306"
+    hostname: local_mysql_main
+    container_name: mysql_main
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_ROOT_HOST: '%'
