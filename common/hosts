@@ -2,3 +2,4 @@
 172.10.0.11     local_nginx_main
 172.10.0.21     local_php_main
 172.10.0.31     local_mysql_main
+172.10.0.41     local_redis_main

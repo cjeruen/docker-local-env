@@ -57,3 +57,13 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
       MYSQL_ROOT_HOST: '%'
+
+  redis_main:
+    build: ./redis/main
+    networks:
+      local_net:
+        ipv4_address: 172.10.0.41
+    ports:
+      - "6381:6379"
+    hostname: local_redis_main
+    container_name: redis_main
