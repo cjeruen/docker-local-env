@@ -42,6 +42,39 @@ services:
     hostname: local_php_main
     container_name: php_main
 
+  php_ext_v5:
+    build: ./php/ext_v5
+    volumes:
+      - ./common/hosts:/etc/hosts:ro
+      - ./opt:/opt
+      - /Users/hui/ch/projects:/workdir/projects
+      - /Users/hui/ch/websites:/workdir/websites
+      - /Users/hui/ch/projects/php-extensions/laosiji:/usr/src/php/ext/laosiji
+    networks:
+      local_net:
+        ipv4_address: 172.10.0.22
+    ports:
+      - "9002:9000"
+    hostname: local_php_ext_v5
+    container_name: php_ext_v5
+
+  php_ext_v7:
+    build: ./php/ext_v7
+    volumes:
+      - ./common/hosts:/etc/hosts:ro
+      - ./opt:/opt
+      - /Users/hui/ch/projects:/workdir/projects
+      - /Users/hui/ch/websites:/workdir/websites
+      - /Users/hui/ch/projects/php-extensions/laosiji:/usr/src/php/ext/laosiji
+    networks:
+      local_net:
+        ipv4_address: 172.10.0.23
+    ports:
+      - "9003:9000"
+    hostname: local_php_ext_v7
+    container_name: php_ext_v7
+
+
   mysql_main:
     build: ./mysql/main
     volumes:
