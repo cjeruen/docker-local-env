@@ -17,8 +17,8 @@ services:
     volumes:
       - ./common/hosts:/etc/hosts:ro
       - ./opt:/opt
-      - /Users/hui/ch/projects:/opt/projects
-      - /Users/hui/ch/websites:/opt/websites
+      - /Users/hui/ch/projects:/workdir/projects
+      - /Users/hui/ch/websites:/workdir/websites
     networks:
       local_net:
         ipv4_address: 172.10.0.11
@@ -45,7 +45,7 @@ services:
   mysql_main:
     build: ./mysql/main
     volumes:
-      - ./Users/hui/ch/datas/mysql/main/db:/var/lib/mysql
+      - /Users/hui/ch/datas/mysql/main/db:/var/lib/mysql
       - ./common/hosts:/etc/hosts:ro
     networks:
       local_net:
