@@ -162,3 +162,16 @@ services:
     hostname: local_redis_main
     container_name: redis_main
 
+  php_zan:
+    build: ./php/zan
+    volumes:
+      - ./common/hosts:/etc/hosts:ro
+    networks:
+      local_net:
+        ipv4_address: 172.10.0.24
+    ports:
+      - "9004:9000"
+      - "8030:8030"
+    hostname: local_php_zan
+    container_name: php_zan
+
