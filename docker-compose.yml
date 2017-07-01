@@ -74,6 +74,21 @@ services:
     hostname: local_php_ext_v7
     container_name: php_ext_v7
 
+  mysql_common:
+    build: ./mysql/common
+    volumes:
+      - /Users/hui/ch/datas/mysql/common/db:/var/lib/mysql
+      - ./common/hosts:/etc/hosts:ro
+    networks:
+      local_net:
+        ipv4_address: 172.10.0.32
+    ports:
+      - "3311:3306"
+    hostname: local_mysql_common
+    container_name: mysql_common
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_ROOT_HOST: '%'
 
   mysql_main:
     build: ./mysql/main
@@ -93,6 +108,8 @@ services:
 
   redis_main:
     build: ./redis/main
+    volumes:
+      - ./common/hosts:/etc/hosts:ro
     networks:
       local_net:
         ipv4_address: 172.10.0.41
@@ -100,3 +117,4 @@ services:
       - "6381:6379"
     hostname: local_redis_main
     container_name: redis_main
+
