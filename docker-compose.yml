@@ -106,6 +106,38 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
       MYSQL_ROOT_HOST: '%'
 
+  mysql_master:
+    build: ./mysql/master
+    volumes:
+      - /Users/hui/ch/datas/mysql/master/db:/var/lib/mysql
+      - ./common/hosts:/etc/hosts:ro
+    networks:
+      local_net:
+        ipv4_address: 172.10.0.32
+    ports:
+      - "3312:3306"
+    hostname: local_mysql_master
+    container_name: mysql_master
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_ROOT_HOST: '%'
+
+  mysql_slave:
+    build: ./mysql/slave
+    volumes:
+      - /Users/hui/ch/datas/mysql/slave/db:/var/lib/mysql
+      - ./common/hosts:/etc/hosts:ro
+    networks:
+      local_net:
+        ipv4_address: 172.10.0.33
+    ports:
+      - "3313:3306"
+    hostname: local_mysql_slave
+    container_name: mysql_slave
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_ROOT_HOST: '%'
+
   redis_common:
     build: ./redis/common
     volumes:
