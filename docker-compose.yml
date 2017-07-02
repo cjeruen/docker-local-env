@@ -166,6 +166,7 @@ services:
     build: ./php/zan
     volumes:
       - ./common/hosts:/etc/hosts:ro
+      - /Users/hui/ch/projects/zan/zanphp-demo:/zan
     networks:
       local_net:
         ipv4_address: 172.10.0.24

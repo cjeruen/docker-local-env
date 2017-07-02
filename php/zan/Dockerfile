@@ -1,8 +1,9 @@
-FROM php:7.1-fpm
+FROM php:7.1
 
 COPY php.ini         /usr/local/etc/php/php.ini
 COPY sources.list    /etc/apt/sources.list
 COPY src/zan/zan-extension /usr/src/php/ext/zan
+COPY php_swoole.h /usr/src/php/ext/zan/php_swoole.h
 
 RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
@@ -25,7 +26,6 @@ RUN apt-get update && apt-get install -y \
 
     # ext-imap start
     && apt-get install -y libc-client-dev libkrb5-dev \
-    && rm -r /var/lib/apt/lists/* \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-install imap \
     # ext-imap end
@@ -46,5 +46,9 @@ RUN apt-get update && apt-get install -y \
 
     && rm -r /var/lib/apt/lists/*
 
+EXPOSE 8030
 
-ENTRYPOINT ["php-fpm"]
+WORKDIR /zan
+
+# ENTRYPOINT ["php-fpm"]
+ENTRYPOINT ["php", "bin/httpd"]
