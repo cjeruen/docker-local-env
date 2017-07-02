@@ -176,3 +176,28 @@ services:
     hostname: local_php_zan
     container_name: php_zan
 
+  php_zan_tcp:
+    build: ./php/zan
+    volumes:
+      - ./common/hosts:/etc/hosts:ro
+      - /Users/hui/ch/projects/zan/zan-tcp:/zan
+    networks:
+      local_net:
+        ipv4_address: 172.10.0.25
+    ports:
+      - "8100:8100"
+    hostname: local_php_zan_tcp
+    container_name: php_zan_tcp
+
+  etcd_common:
+    build: ./etcd/common
+    volumes:
+      - ./common/hosts:/etc/hosts:ro
+    networks:
+      local_net:
+        ipv4_address: 172.10.0.51
+    ports:
+      - "2379:2379"
+      - "2380:2380"
+    hostname: local_etcd_common
+    container_name: etcd_common

@@ -14,3 +14,8 @@
 
 172.10.0.32     local_mysql_master
 172.10.0.33     local_mysql_slave
+
+172.10.0.24     local_php_zan
+172.10.0.25     local_php_zan_tcp
+
+172.10.0.51     local_etcd_common
