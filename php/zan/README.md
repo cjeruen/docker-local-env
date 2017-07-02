@@ -2,14 +2,16 @@
 
 ## 准备工作
 ```
+
 $ git clone https://github.com/cjeruen/docker-local-lnmp-env.git
 
 $ cd docker-local-lnmp-env/zan
 
 $ git clone https://github.com/youzan/zan.git src/zan
 
-下载 hiredis  https://github.com/redis/hiredis/releases 
+$ git clone --recursive --depth=1 https://github.com/kjdev/php-ext-lz4.git src/php-ext-lz4
 
+下载 hiredis  https://github.com/redis/hiredis/releases 
 移动到 src/hiredis.tar.gz
 
 ```
