@@ -37,6 +37,9 @@ RUN apt-get update && apt-get install -y \
     && pecl install redis \
     && docker-php-ext-enable redis \
 
+    && pecl install apcu \
+    && docker-php-ext-enable apcu \
+
     # cannot find -lhiredis_linux
     # && apt-get install -y libhiredis-dev \
     # && ln -s /usr/lib/x86_64-linux-gnu/libhiredis.so /usr/lib/libhiredis_linux.so \
