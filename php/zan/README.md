@@ -8,6 +8,10 @@ $ cd docker-local-lnmp-env/zan
 
 $ git clone https://github.com/youzan/zan.git src/zan
 
+下载 hiredis  https://github.com/redis/hiredis/releases 
+
+移动到 src/hiredis.tar.gz
+
 ```
 
 ## 运行zan容器

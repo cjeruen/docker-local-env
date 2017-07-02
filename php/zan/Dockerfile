@@ -5,6 +5,8 @@ COPY sources.list    /etc/apt/sources.list
 COPY src/zan/zan-extension /usr/src/php/ext/zan
 COPY php_swoole.h /usr/src/php/ext/zan/php_swoole.h
 
+ADD src/hiredis.tar.gz /opt
+
 RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
@@ -34,8 +36,14 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-enable redis \
 
     # cannot find -lhiredis_linux
-    && apt-get install -y libhiredis-dev \
-    && ln -s /usr/lib/x86_64-linux-gnu/libhiredis.so /usr/lib/libhiredis_linux.so \
+    # && apt-get install -y libhiredis-dev \
+    # && ln -s /usr/lib/x86_64-linux-gnu/libhiredis.so /usr/lib/libhiredis_linux.so \
+
+    # 还是用这个方式好 上面的导致 redis 无法连接
+    && cd /opt/hiredis-0.13.3 \
+    && make && make install && ldconfig \
+    && ln -s /usr/local/lib/libhiredis.so /usr/local/lib/libhiredis_linux.so \
+    && ln -s /usr/local/lib/libhiredis.a /usr/local/lib/libhiredis_linux.a \
     # cannot find -lhiredis_linux
 
     && docker-php-ext-install -j$(nproc) sockets \
