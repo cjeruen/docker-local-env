@@ -1,8 +1,20 @@
 ## docker for youzan/zan
 
+## 准备工作
+```
+$ git clone https://github.com/cjeruen/docker-local-lnmp-env.git
+
+$ cd docker-local-lnmp-env/zan
+
+$ git clone https://github.com/youzan/zan.git src/zan
+
+```
+
+## 运行zan容器
+
 > 1. docker-compose 方式参考本项目下的 docker-compose.yml
 
-> 2. 单独 dockerfile build 的方式
+> 2. 单独 Dockerfile build 的方式 (暂时推荐这个)
 
 > `docker build -t zan_container .`
 
@@ -18,12 +30,12 @@
 
 > FROM php:5.6
 
-### 配置文件  zan 扩展文件
+### 配置文件  zan 扩展文件
 
 ```
 
 // 1. 自行克隆 zan-extension 代码到对应目录
-// 2. php_swoole.h 改了下 sockets 通不过
+// 2. php_swoole.h 改了下 sockets 通不过
 // 3. php.ini 我加入了 zan 的配置
 
 https://github.com/youzan/zan
@@ -37,7 +49,7 @@ COPY php_swoole.h /usr/src/php/ext/zan/php_swoole.h
 ```
 
 
-### 相关安装
+### 相关安装
 
 ```
 
